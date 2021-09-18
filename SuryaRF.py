@@ -1,6 +1,7 @@
 from pathlib import Path
 import json
 from datetime import datetime, timedelta
+from random import randint
 
 
 def read_file(file_location):
@@ -29,6 +30,7 @@ def get_sunrise_sunset_times(sundata):
     sunrise = datetime.strptime(sunrise, "%I:%M %p \u2191").strftime("%M %H")
     sunset = datetime.strptime(sunset, "%I:%M %p \u2191").strftime("%M %H")
     print(f"Sunrise: {sunrise} Sunset: {sunset}")
+    return sunrise, sunset
 
 
 def test_calendar_is_leap_year(sundata):
@@ -78,8 +80,8 @@ def get_extreme_sunrise(sundata, sunrise=True):
     recent_three_months = map(
         lambda x: fill_month_text(x), [last_month, this_month, next_month]
     )
-    min_time = 1e6
-    max_time = 0
+    min_time = 0
+    max_time = -1e10
     for each_month in recent_three_months:
         for _, e_val in sundata[each_month].items():
             if sunrise:
@@ -92,13 +94,18 @@ def get_extreme_sunrise(sundata, sunrise=True):
                     e_val["Sunrise/Sunset"]["Sunset"].replace("am", "AM").replace("pm", "PM"),
                     "%I:%M %p \u2191",
                 )
-
             if (sun_time.timestamp()) < min_time:
                 min_time = sun_time.timestamp()
-            if (sun_time.timestamp()) > min_time:
+            if (sun_time.timestamp()) > max_time:
                 max_time = sun_time.timestamp()
+    return datetime.fromtimestamp(min_time), datetime.fromtimestamp(max_time)
 
-    print(datetime.fromtimestamp(min_time), datetime.fromtimestamp(max_time))
+def get_other_action(sundata, duration_in_sec=120):
+    min_rise, _ = get_extreme_sunrise(sundata, True)
+    _, max_set = get_extreme_sunrise(sundata, False)
+    return (min_rise - timedelta(minutes=randint(10,duration_in_sec))).strftime('%M %H'), (max_set + timedelta(minutes=randint(10,duration_in_sec))).strftime('%M %H')
 
 sundata = read_file("Confidential/Sundata.json")
-get_extreme_sunrise(sundata, False)
+sunrise, sunset = get_sunrise_sunset_times(sundata)
+sunset_min, sunset_max = get_other_action(sundata, 60)
+print(sunset_min, sunrise, sunset, sunset_max)
