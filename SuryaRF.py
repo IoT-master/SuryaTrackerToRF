@@ -108,5 +108,5 @@ def get_other_action(sundata, duration_in_sec=120):
 if __name__ == "__main__":
     sundata = read_file("Confidential/Sundata.json")
     sunrise, sunset = get_sunrise_sunset_times(sundata)
-    sunset_min, sunset_max = get_other_action(sundata, 60)
-    print(sunset_min, sunrise, sunset, sunset_max)
+    sunrise_min, sunset_max = get_other_action(sundata, 60)
+    print(sunrise_min, sunrise, sunset, sunset_max)
