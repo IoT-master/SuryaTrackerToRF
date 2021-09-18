@@ -105,7 +105,8 @@ def get_other_action(sundata, duration_in_sec=120):
     _, max_set = get_extreme_sunrise(sundata, False)
     return (min_rise - timedelta(minutes=randint(10,duration_in_sec))).strftime('%M %H'), (max_set + timedelta(minutes=randint(10,duration_in_sec))).strftime('%M %H')
 
-sundata = read_file("Confidential/Sundata.json")
-sunrise, sunset = get_sunrise_sunset_times(sundata)
-sunset_min, sunset_max = get_other_action(sundata, 60)
-print(sunset_min, sunrise, sunset, sunset_max)
+if __name__ == "__main__":
+    sundata = read_file("Confidential/Sundata.json")
+    sunrise, sunset = get_sunrise_sunset_times(sundata)
+    sunset_min, sunset_max = get_other_action(sundata, 60)
+    print(sunset_min, sunrise, sunset, sunset_max)
