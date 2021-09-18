@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from Confidential.switch_table import switch1on
 import subprocess
 from time import sleep

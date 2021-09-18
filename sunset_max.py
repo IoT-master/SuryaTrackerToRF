@@ -3,7 +3,7 @@
 import subprocess
 from time import sleep
 from Confidential.switch_table import switch1off
-from Confidential.switch_table import switch3on
+# from Confidential.switch_table import switch3on
 
 def running_from_cli(command):
     return subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).communicate()
