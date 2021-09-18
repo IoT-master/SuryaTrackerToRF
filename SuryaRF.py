@@ -78,7 +78,7 @@ def get_extreme_sunrise(sundata, sunrise=True):
     recent_three_months = map(
         lambda x: fill_month_text(x), [last_month, this_month, next_month]
     )
-    min_time = 10 ^ 6
+    min_time = 1e6
     max_time = 0
     for each_month in recent_three_months:
         for _, e_val in sundata[each_month].items():
