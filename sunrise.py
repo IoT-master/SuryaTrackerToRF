@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+from Confidential.switch_table import switch1off
 import subprocess
 from time import sleep
 
@@ -9,8 +9,8 @@ def running_from_cli(command):
 
 
 if __name__ == "__main__":
-    running_from_cli('/var/www/rfoutlet/codesend 4478268')
+    running_from_cli(f'/var/www/rfoutlet/codesend {switch1off}')
     sleep(1)
-    running_from_cli('/var/www/rfoutlet/codesend 4478268')
+    running_from_cli(f'/var/www/rfoutlet/codesend {switch1off}')
     sleep(1)
-    running_from_cli('/var/www/rfoutlet/codesend 4478268')
+    running_from_cli(f'/var/www/rfoutlet/codesend {switch1off}')
