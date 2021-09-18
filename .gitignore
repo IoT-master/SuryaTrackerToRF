@@ -140,7 +140,3 @@ Confidential/*
 !.gitkeep
 .vscode
 .pytest_cache
-sunrise_min.py
-sunrise.py
-sunset_max.py
-sunset.py
