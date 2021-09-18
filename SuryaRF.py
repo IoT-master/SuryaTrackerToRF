@@ -83,20 +83,20 @@ def get_extreme_sunrise(sundata, sunrise=True):
     for each_month in recent_three_months:
         for _, e_val in sundata[each_month].items():
             if sunrise:
-                temp = datetime.strptime(
+                sun_time = datetime.strptime(
                     e_val["Sunrise/Sunset"]["Sunrise"].replace("am", "AM").replace("pm", "PM"),
                     "%I:%M %p \u2191",
                 )
             else:
-                temp = datetime.strptime(
+                sun_time = datetime.strptime(
                     e_val["Sunrise/Sunset"]["Sunset"].replace("am", "AM").replace("pm", "PM"),
                     "%I:%M %p \u2191",
                 )
 
-            if (temp.timestamp()) < min_time:
-                min_time = temp.timestamp()
-            if (temp.timestamp()) > min_time:
-                max_time = temp.timestamp()
+            if (sun_time.timestamp()) < min_time:
+                min_time = sun_time.timestamp()
+            if (sun_time.timestamp()) > min_time:
+                max_time = sun_time.timestamp()
 
     print(datetime.fromtimestamp(min_time), datetime.fromtimestamp(max_time))
 
