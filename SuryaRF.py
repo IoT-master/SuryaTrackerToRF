@@ -72,6 +72,7 @@ def test_calendar_is_not_leap_year(sundata):
         "12": 31,
     }
 
+
 def get_extreme_sunrise(sundata, sunrise=True):
     now = datetime.now()
     last_month = str((now - timedelta(weeks=4)).month)
@@ -82,28 +83,37 @@ def get_extreme_sunrise(sundata, sunrise=True):
     )
     min_time = 0
     max_time = -1e10
+    all_datetimes = []
     for each_month in recent_three_months:
         for _, e_val in sundata[each_month].items():
             if sunrise:
-                sun_time = datetime.strptime(
-                    e_val["Sunrise/Sunset"]["Sunrise"].replace("am", "AM").replace("pm", "PM"),
-                    "%I:%M %p \u2191",
+                all_datetimes.append(
+                    datetime.strptime(
+                        e_val["Sunrise/Sunset"]["Sunrise"]
+                        .replace("am", "AM")
+                        .replace("pm", "PM"),
+                        "%I:%M %p \u2191",
+                    )
                 )
             else:
-                sun_time = datetime.strptime(
-                    e_val["Sunrise/Sunset"]["Sunset"].replace("am", "AM").replace("pm", "PM"),
-                    "%I:%M %p \u2191",
+                all_datetimes.append(
+                    datetime.strptime(
+                        e_val["Sunrise/Sunset"]["Sunset"]
+                        .replace("am", "AM")
+                        .replace("pm", "PM"),
+                        "%I:%M %p \u2191",
+                    )
                 )
-            if (sun_time.timestamp()) < min_time:
-                min_time = sun_time.timestamp()
-            if (sun_time.timestamp()) > max_time:
-                max_time = sun_time.timestamp()
-    return datetime.fromtimestamp(min_time), datetime.fromtimestamp(max_time)
+    return min(all_datetimes), max(all_datetimes)
+
 
 def get_other_action(sundata, duration_in_sec=120):
     min_rise, _ = get_extreme_sunrise(sundata, True)
     _, max_set = get_extreme_sunrise(sundata, False)
-    return (min_rise - timedelta(minutes=randint(10,duration_in_sec))).strftime('%M %H'), (max_set + timedelta(minutes=randint(10,duration_in_sec))).strftime('%M %H')
+    return (min_rise - timedelta(minutes=randint(10, duration_in_sec))).strftime(
+        "%M %H"
+    ), (max_set + timedelta(minutes=randint(10, duration_in_sec))).strftime("%M %H")
+
 
 if __name__ == "__main__":
     sundata = read_file("Confidential/Sundata.json")
