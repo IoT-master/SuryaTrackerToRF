@@ -140,3 +140,5 @@ Confidential/*
 !.gitkeep
 editcron.py
 GetCorrectSSTimes.py
+.vscode
+.pytest_cache
