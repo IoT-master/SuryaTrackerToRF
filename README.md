@@ -1,8 +1,16 @@
 # Jist of directions
 
 ## Will tidy this up later
+
+Transmit Circuit Connection:
 VCC = 5v
 SIGNAL attaches to GPIO0 or PIN11 BCM17
+Receive Circuit Connection:
+VCC = 5v
+Pin Closest to 5V pin is the signal pin.
+Signal Pin to GPI02 or Pin 13 or BCM:R1:21/R2:27
+https://i0.wp.com/timleland.com/wp-content/uploads/2014/12/Rf-Wiring-1.png
+https://projects.drogon.net/raspberry-pi/wiringpi/pins/
 See:
 https://projects.drogon.net/raspberry-pi/wiringpi/pins/
 
