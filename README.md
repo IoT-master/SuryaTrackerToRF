@@ -28,6 +28,9 @@ sudo chmod 4755 /var/www/rfoutlet/codesend
 /var/www/rfoutlet/codesend <code>
 Pulse Length is 189
 
+To sniff out codes:
+sudo /var/www/rfoutlet/RFSniffer
+
 Note to self:
 
 https://timleland.com/wireless-power-outlets/
