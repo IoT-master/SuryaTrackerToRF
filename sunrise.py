@@ -1,22 +1,5 @@
 #!/usr/bin/python3
+from base_action import run_event
 from Confidential.switch_table import switch1off
-from Confidential.switch_table import switch2off
-import subprocess
-from time import sleep
 
-
-def running_from_cli(command):
-    return subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).communicate()
-
-
-if __name__ == "__main__":
-    running_from_cli(f'/var/www/rfoutlet/codesend {switch1off}')
-    sleep(1)
-    running_from_cli(f'/var/www/rfoutlet/codesend {switch1off}')
-    sleep(1)
-    running_from_cli(f'/var/www/rfoutlet/codesend {switch1off}')
-    running_from_cli(f'/var/www/rfoutlet/codesend {switch2off}')
-    sleep(1)
-    running_from_cli(f'/var/www/rfoutlet/codesend {switch2off}')
-    sleep(1)
-    running_from_cli(f'/var/www/rfoutlet/codesend {switch2off}')
+run_event([switch1off])
