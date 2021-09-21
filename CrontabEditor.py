@@ -26,7 +26,7 @@ if __name__ == "__main__":
     CRON_LOCATION = "/var/spool/cron/crontabs/pi"
     sundata = read_file("/home/pi/SuryaTrackerToRF/Confidential/Sundata.json")
     sunrise, sunset = get_sunrise_sunset_times(sundata)
-    sunrise_min, sunset_max = get_other_action(sundata, 60)
+    sunrise_min, sunset_max = get_other_action(sundata, 60*2)
     print(sunrise_min, sunrise, sunset, sunset_max)
     rewrite_cron(CRON_LOCATION, sunrise_min, sunrise, sunset, sunset_max)
     # rewrite_cron(Path.cwd().joinpath('Confidential/crontab.txt'), sunrise_min, sunrise, sunset, sunset_max)

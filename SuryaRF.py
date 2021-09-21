@@ -1,7 +1,7 @@
 from pathlib import Path
 import json
 from datetime import datetime, timedelta
-from random import randint
+from random import normalvariate
 
 
 def read_file(file_location):
@@ -107,16 +107,16 @@ def get_extreme_sunrise(sundata, sunrise=True):
     return min(all_datetimes), max(all_datetimes)
 
 
-def get_other_action(sundata, duration_in_sec=120):
+def get_other_action(sundata, duration_in_sec=120, spread=5):
     min_rise, _ = get_extreme_sunrise(sundata, True)
     _, max_set = get_extreme_sunrise(sundata, False)
-    return (min_rise - timedelta(minutes=randint(10, duration_in_sec))).strftime(
+    return (min_rise - timedelta(minutes=round(normalvariate(duration_in_sec, spread),2))).strftime(
         "%M %H"
-    ), (max_set + timedelta(minutes=randint(10, duration_in_sec))).strftime("%M %H")
+    ), (max_set + timedelta(minutes=round(normalvariate(duration_in_sec, spread),2))).strftime("%M %H")
 
 
 if __name__ == "__main__":
     sundata = read_file("Confidential/Sundata.json")
     sunrise, sunset = get_sunrise_sunset_times(sundata)
-    sunrise_min, sunset_max = get_other_action(sundata, 60)
+    sunrise_min, sunset_max = get_other_action(sundata, 60*2)
     print(sunrise_min, sunrise, sunset, sunset_max)
